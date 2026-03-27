@@ -762,11 +762,6 @@ footer {
 /* Mobile mini decorations beside profile photo */
 .deco-dna-mini, .deco-nn-mini { display: none; }
 
-@keyframes dna-mini-pulse {
-  0%, 100% { opacity: 0.28; }
-  50%       { opacity: 0.48; }
-}
-
 @media (max-width: 768px) {
   .profile-photo-wrap {
     display: flex;
@@ -782,7 +777,7 @@ footer {
   .deco-dna-mini {
     display: block;
     flex-shrink: 0;
-    animation: dna-mini-pulse 3s ease-in-out infinite;
+    opacity: 0.35;
   }
   .deco-nn-mini {
     display: block;

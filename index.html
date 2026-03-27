@@ -31,16 +31,25 @@
 <script>
 (function () {
   const DUR = 8000, STEP = 900;
+
+  // Main DNA
   const yPos = [20, 60, 100, 140, 180, 220, 260, 300, 340];
   const pathL = document.getElementById('dna-sl');
   const pathR = document.getElementById('dna-sr');
   const rungs = Array.from(document.querySelectorAll('.dna-rung'));
-  // Cache rung child elements
   const rungParts = rungs.map(function(g) {
     return { line: g.querySelector('line'), circles: g.querySelectorAll('circle') };
   });
 
-  // Smooth cosine wave: 1 → 0 → -1 → 0 → 1 with no harsh snapping at extremes
+  // Mini DNA
+  const yPosMini = [0, 35, 70, 105, 140];
+  const pathML = document.getElementById('dna-mini-sl');
+  const pathMR = document.getElementById('dna-mini-sr');
+  const miniRungs = Array.from(document.querySelectorAll('.dna-mini-rung'));
+  const miniRungParts = miniRungs.map(function(g) {
+    return { line: g.querySelector('line'), circles: g.querySelectorAll('circle') };
+  });
+
   function scaleAtPhase(phase) {
     return Math.cos(2 * Math.PI * phase);
   }
@@ -64,13 +73,13 @@
   }
 
   function frame(t) {
+    // Main DNA
     const lpts = [], rpts = [];
     for (let i = 0; i < 9; i++) {
       const phase = ((t + i * STEP) % DUR) / DUR;
       const s  = scaleAtPhase(phase);
       const lx = 50 - 32 * s;
       const rx = 50 + 32 * s;
-      // Move rung line and dots to the computed positions
       const p = rungParts[i];
       p.line.setAttribute('x1', lx.toFixed(2));
       p.line.setAttribute('x2', rx.toFixed(2));
@@ -81,6 +90,25 @@
     }
     pathL.setAttribute('d', catmullRom(lpts));
     pathR.setAttribute('d', catmullRom(rpts));
+
+    // Mini DNA (same timing, scaled to 40px viewBox)
+    const mlpts = [], mrpts = [];
+    for (let i = 0; i < 5; i++) {
+      const phase = ((t + i * STEP) % DUR) / DUR;
+      const s  = scaleAtPhase(phase);
+      const lx = 20 - 13 * s;
+      const rx = 20 + 13 * s;
+      const p = miniRungParts[i];
+      p.line.setAttribute('x1', lx.toFixed(2));
+      p.line.setAttribute('x2', rx.toFixed(2));
+      p.circles[0].setAttribute('cx', lx.toFixed(2));
+      p.circles[1].setAttribute('cx', rx.toFixed(2));
+      mlpts.push({x: lx, y: yPosMini[i]});
+      mrpts.push({x: rx, y: yPosMini[i]});
+    }
+    pathML.setAttribute('d', catmullRom(mlpts));
+    pathMR.setAttribute('d', catmullRom(mrpts));
+
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
@@ -138,13 +166,13 @@
   <div class="profile">
     <div class="profile-photo-wrap">
       <svg class="deco-dna-mini" xmlns="http://www.w3.org/2000/svg" width="44" height="170" viewBox="0 0 40 155">
-        <path d="M5,0 C5,17 35,17 35,35 C35,52 5,52 5,70 C5,87 35,87 35,105 C35,122 5,122 5,140 C5,150 35,150 35,155" stroke="#00ccee" stroke-width="1.5" fill="none"/>
-        <path d="M35,0 C35,17 5,17 5,35 C5,52 35,52 35,70 C35,87 5,87 5,105 C5,122 35,122 35,140 C35,150 5,150 5,155" stroke="#aaefff" stroke-width="1.5" fill="none"/>
-        <line x1="5"  y1="0"   x2="35" y2="0"   stroke="#44ddff" stroke-width="1.5"/><circle cx="5"  cy="0"   r="4" fill="#00ccee"/><circle cx="35" cy="0"   r="4" fill="#aaefff"/>
-        <line x1="35" y1="35"  x2="5"  y2="35"  stroke="#44ddff" stroke-width="1.5"/><circle cx="35" cy="35"  r="4" fill="#00ccee"/><circle cx="5"  cy="35"  r="4" fill="#aaefff"/>
-        <line x1="5"  y1="70"  x2="35" y2="70"  stroke="#44ddff" stroke-width="1.5"/><circle cx="5"  cy="70"  r="4" fill="#00ccee"/><circle cx="35" cy="70"  r="4" fill="#aaefff"/>
-        <line x1="35" y1="105" x2="5"  y2="105" stroke="#44ddff" stroke-width="1.5"/><circle cx="35" cy="105" r="4" fill="#00ccee"/><circle cx="5"  cy="105" r="4" fill="#aaefff"/>
-        <line x1="5"  y1="140" x2="35" y2="140" stroke="#44ddff" stroke-width="1.5"/><circle cx="5"  cy="140" r="4" fill="#00ccee"/><circle cx="35" cy="140" r="4" fill="#aaefff"/>
+        <path id="dna-mini-sl" stroke="#00ccee" stroke-width="1.5" fill="none"/>
+        <path id="dna-mini-sr" stroke="#aaefff" stroke-width="1.5" fill="none"/>
+        <g class="dna-mini-rung"><line x1="7" y1="0"   x2="33" y2="0"   stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="0"   r="4" fill="#00ccee"/><circle cx="33" cy="0"   r="4" fill="#aaefff"/></g>
+        <g class="dna-mini-rung"><line x1="7" y1="35"  x2="33" y2="35"  stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="35"  r="4" fill="#00ccee"/><circle cx="33" cy="35"  r="4" fill="#aaefff"/></g>
+        <g class="dna-mini-rung"><line x1="7" y1="70"  x2="33" y2="70"  stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="70"  r="4" fill="#00ccee"/><circle cx="33" cy="70"  r="4" fill="#aaefff"/></g>
+        <g class="dna-mini-rung"><line x1="7" y1="105" x2="33" y2="105" stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="105" r="4" fill="#00ccee"/><circle cx="33" cy="105" r="4" fill="#aaefff"/></g>
+        <g class="dna-mini-rung"><line x1="7" y1="140" x2="33" y2="140" stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="140" r="4" fill="#00ccee"/><circle cx="33" cy="140" r="4" fill="#aaefff"/></g>
       </svg>
       <img class="profile-photo" src="profile.jpg" alt="Daniel Hinjos García">
       <svg class="deco-nn-mini" xmlns="http://www.w3.org/2000/svg" width="56" height="170" viewBox="0 0 50 155">
