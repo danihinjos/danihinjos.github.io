@@ -393,13 +393,13 @@ section h2 {
 
 .about-col-right {
   flex: 1;
-  padding-top: 4px;
+  padding-top: 0;
   border-left: 1px solid #e0e0e0;
   padding-left: 48px;
 }
 
 .about-col-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: #111;
   margin-bottom: 16px;
@@ -416,7 +416,7 @@ section h2 {
 }
 
 .about-p {
-  font-size: 17px;
+  font-size: 19.5px;
   color: #444;
   margin-bottom: 12px;
   line-height: 1.75;
@@ -805,8 +805,47 @@ footer {
 .deco-dna { left: calc(50% - 750px); opacity: 0.35; }
 .deco-nn  { right: calc(50% - 750px); opacity: 0.32; }
 
-@media (max-width: 1500px) {
+@media (max-width: 1080px) {
   .deco-dna, .deco-nn { display: none; }
+}
+
+@media (min-width: 1081px) and (max-width: 1199px) {
+  .deco-dna {
+    left: 0;
+    transform: translateY(-50%) scale(0.55);
+    transform-origin: left center;
+  }
+  .deco-nn {
+    right: 0;
+    transform: translateY(-50%) scale(0.35);
+    transform-origin: right center;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1350px) {
+  .deco-dna {
+    left: 0;
+    transform: translateY(-50%) scale(0.75);
+    transform-origin: left center;
+  }
+  .deco-nn {
+    right: 0;
+    transform: translateY(-50%) scale(0.55);
+    transform-origin: right center;
+  }
+}
+
+@media (min-width: 1351px) and (max-width: 1499px) {
+  .deco-dna {
+    left: 0;
+    transform: translateY(-50%) scale(0.9);
+    transform-origin: left center;
+  }
+  .deco-nn {
+    right: 0;
+    transform: translateY(-50%) scale(0.75);
+    transform-origin: right center;
+  }
 }
 
 @media (max-width: 1320px) {
