@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.nature.com)",
+      "WebFetch(domain:aclanthology.org)",
+      "WebFetch(domain:arxiv.org)",
+      "WebSearch",
+      "WebFetch(domain:www.semanticscholar.org)",
+      "WebFetch(domain:media.springernature.com)"
+    ]
+  }
+}
