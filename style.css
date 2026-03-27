@@ -760,7 +760,6 @@ footer {
 /* DNA rung positions driven entirely by JS */
 
 /* Mobile mini decorations beside profile photo */
-.profile-photo-wrap { display: contents; }
 .deco-dna-mini, .deco-nn-mini { display: none; }
 
 @keyframes dna-mini-pulse {
