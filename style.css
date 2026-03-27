@@ -814,3 +814,106 @@ footer {
   .tl-header { flex-direction: column; }
   nav { gap: 12px; }
 }
+
+@media (max-width: 768px) {
+  /* Container */
+  .container {
+    padding: 72px 16px 80px;
+  }
+
+  /* Header */
+  .site-header {
+    padding: 10px 16px;
+  }
+  .site-subtitle-bar {
+    top: 42px;
+    left: 16px;
+    font-size: 11px;
+  }
+
+  /* Reset all bleed sections */
+  #research,
+  .about-split,
+  #certifications,
+  .journey-cols {
+    position: static;
+    left: auto;
+    width: 100%;
+  }
+
+  /* Research section */
+  #research {
+    border-left: 2px solid #00b4cc;
+    padding-left: 16px;
+    padding-right: 0;
+  }
+  .research-topics {
+    flex-wrap: wrap;
+  }
+  .research-topic {
+    flex: 1 1 40%;
+  }
+
+  /* Profile */
+  .profile-photo {
+    float: none;
+    display: block;
+    margin: 0 auto 20px;
+    width: 160px;
+    height: 170px;
+  }
+  .profile-text h1 {
+    font-size: 24px;
+  }
+  .profile-text p {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  /* About split */
+  .about-split {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .about-col-right {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 24px;
+  }
+  .about-photo {
+    aspect-ratio: 4 / 3;
+  }
+  .about-extra-figure {
+    margin-top: 16px;
+  }
+  .about-p {
+    font-size: 16px;
+  }
+  .about-col-title {
+    font-size: 20px;
+  }
+
+  /* Publications */
+  .pub-entry { flex-direction: column; }
+  .pub-thumb { width: 100%; height: 100px; }
+  .pub-info .pub-title { font-size: 14px; }
+  .pub-info .pub-authors { font-size: 12px; }
+  .pub-info .pub-venue { font-size: 12px; }
+
+  /* Entries */
+  .entry-title { font-size: 17px; }
+  .entry-subtitle { font-size: 15px; }
+  .entry-date { font-size: 14px; }
+
+  /* Sum cards */
+  .sum-card-title { font-size: 16px; }
+  .sum-card-sub, .sum-card-detail { font-size: 14px; }
+
+  /* Nav */
+  nav { gap: 12px; font-size: 13px; }
+  .site-name { font-size: 17px; }
+
+  /* Section titles */
+  section h2 { font-size: 17px; }
+}
