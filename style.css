@@ -790,8 +790,8 @@ footer {
 .nn-layer-h circle { animation: node-on  6s ease-in-out infinite 1.6s; }
 .nn-conn-ho path   { animation: draw-conn 6s ease-in-out infinite 2.1s;  stroke-dasharray: 1; }
 .nn-layer-o circle { animation: node-on  6s ease-in-out infinite 3.0s; }
-.deco-dna { left: max(0px, calc(50% - 750px)); opacity: 0.35; }
-.deco-nn  { right: max(0px, calc(50% - 750px)); opacity: 0.32; }
+.deco-dna { left: max(0px, calc(50% - 640px)); opacity: 0.35; }
+.deco-nn  { right: max(0px, calc(50% - 700px)); opacity: 0.32; }
 
 @media (max-width: 1080px) {
   .deco-dna, .deco-nn { display: none; }
@@ -830,7 +830,7 @@ footer {
   }
 }
 
-@media (max-width: 1320px) {
+@media (max-width: 1600px) {
   .about-split,
   #certifications,
   .journey-cols {
