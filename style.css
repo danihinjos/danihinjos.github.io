@@ -244,14 +244,8 @@ section h2 {
   border-radius: 4px;
   padding: 6px 10px;
   letter-spacing: 0.02em;
-  transition: color 0.18s, border-color 0.18s;
-  cursor: default;
 }
 
-.research-topic:hover {
-  color: #00b4cc;
-  border-color: #00b4cc;
-}
 
 /* ── Research Interests ── */
 .research-interests {
