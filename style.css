@@ -932,10 +932,11 @@ footer {
     padding-right: 0;
   }
   .research-topics {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
   .research-topic {
-    flex: 1 1 40%;
+    flex: none;
+    width: 100%;
   }
 
   /* Profile */
@@ -955,7 +956,7 @@ footer {
   }
 
   .research-lede {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   /* About split */
