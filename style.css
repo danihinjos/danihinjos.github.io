@@ -812,7 +812,7 @@ footer {
 
 @media (min-width: 1200px) and (max-width: 1350px) {
   .deco-dna {
-    left: max(0px, calc(50% - 670px));
+    left: max(0px, calc(50% - 550px));
     transform: translateY(-50%) scale(0.75);
     transform-origin: left center;
   }
