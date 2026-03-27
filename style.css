@@ -766,8 +766,7 @@ footer {
   .profile-photo-wrap {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
   .profile-photo-wrap .profile-photo {
