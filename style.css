@@ -51,7 +51,7 @@ a { color: #222; text-decoration: underline; text-decoration-color: rgba(0,180,2
 a:hover { color: #222; text-decoration-color: rgba(240,146,40,0.5); }
 
 .container {
-  max-width: 960px;
+  max-width: 920px;
   margin: 0 auto;
   padding: 80px 24px 120px;
 }
@@ -91,7 +91,7 @@ a:hover { color: #222; text-decoration-color: rgba(240,146,40,0.5); }
   top: 46px;
   left: 32px;
   z-index: 101;
-  font-size: 13px;
+  font-size: 14px;
   color: #00b4cc;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -157,7 +157,7 @@ nav a.nav-active {
 .profile-text p {
   margin-bottom: 10px;
   color: #444;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .profile-links {
@@ -218,7 +218,7 @@ section h2 {
 }
 
 .research-lede {
-  font-size: 18px;
+  font-size: 20.3px;
   color: #444;
   line-height: 1.75;
   margin: 0;
@@ -233,7 +233,7 @@ section h2 {
 .research-topic {
   flex: 1;
   text-align: center;
-  font-size: 11.5px;
+  font-size: 16px;
   color: #888;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -301,14 +301,14 @@ section h2 {
 
 .pub-info .pub-title {
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: 17px;
   color: #111;
   margin-bottom: 4px;
   line-height: 1.4;
 }
 
 .pub-info .pub-authors {
-  font-size: 14px;
+  font-size: 15.5px;
   color: #555;
   margin-bottom: 4px;
   line-height: 1.5;
@@ -317,13 +317,13 @@ section h2 {
 .pub-info .pub-authors strong { color: #111; }
 
 .pub-info .pub-venue {
-  font-size: 13.5px;
+  font-size: 15px;
   color: #777;
   margin-bottom: 5px;
   line-height: 1.45;
 }
 
-.pub-info .pub-links a { font-size: 14px; margin-right: 8px; }
+.pub-info .pub-links a { font-size: 15px; margin-right: 8px; }
 
 /* ── About Me paragraphs ── */
 /* ── About split layout ── */
