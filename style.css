@@ -71,6 +71,10 @@ a:hover { color: #222; text-decoration-color: rgba(240,146,40,0.5); }
 }
 
 
+.site-brand {
+  text-decoration: none;
+}
+
 .site-name {
   font-weight: 700;
   font-size: 19px;
@@ -95,9 +99,10 @@ a:hover { color: #222; text-decoration-color: rgba(240,146,40,0.5); }
   color: #00b4cc;
   font-weight: 500;
   letter-spacing: 0.02em;
-  pointer-events: none;
+  pointer-events: auto;
   background: #fcfdfd;
   padding-bottom: 4px;
+  text-decoration: none;
 }
 
 nav {
@@ -800,8 +805,21 @@ footer {
 .deco-dna { left: calc(50% - 750px); opacity: 0.35; }
 .deco-nn  { right: calc(50% - 750px); opacity: 0.32; }
 
-@media (max-width: 1080px) {
+@media (max-width: 1500px) {
   .deco-dna, .deco-nn { display: none; }
+}
+
+@media (max-width: 1320px) {
+  .about-split,
+  #certifications,
+  .journey-cols {
+    position: static;
+    left: auto;
+    width: 100%;
+  }
+  .about-p {
+    font-size: 18px;
+  }
 }
 
 /* ── Responsive ── */
