@@ -217,7 +217,7 @@ section h2 {
 }
 
 .research-lede {
-  font-size: 20.3px;
+  font-size: 22px;
   color: #444;
   line-height: 1.75;
   margin: 0;
@@ -232,11 +232,11 @@ section h2 {
 .research-topic {
   flex: 1;
   text-align: center;
-  font-size: 16px;
+  font-size: 13px;
   color: #888;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 6px 10px;
+  padding: 4px 7px;
   letter-spacing: 0.02em;
 }
 
