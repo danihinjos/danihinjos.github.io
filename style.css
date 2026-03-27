@@ -912,7 +912,11 @@ footer {
   }
   .profile-text p {
     font-size: 15px;
-    text-align: left;
+    text-align: justify;
+  }
+
+  .research-lede {
+    font-size: 15px;
   }
 
   /* About split */
