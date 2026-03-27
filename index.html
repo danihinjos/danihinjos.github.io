@@ -32,7 +32,7 @@
 (function () {
   const DUR = 8000, STEP = 900;
 
-  // Main DNA
+  // Main DNA (elements exist above this script)
   const yPos = [20, 60, 100, 140, 180, 220, 260, 300, 340];
   const pathL = document.getElementById('dna-sl');
   const pathR = document.getElementById('dna-sr');
@@ -41,18 +41,18 @@
     return { line: g.querySelector('line'), circles: g.querySelectorAll('circle') };
   });
 
-  // Mini DNA
+  // Mini DNA (elements are below this script — init after DOM ready)
   const yPosMini = [0, 35, 70, 105, 140];
-  const pathML = document.getElementById('dna-mini-sl');
-  const pathMR = document.getElementById('dna-mini-sr');
-  const miniRungs = Array.from(document.querySelectorAll('.dna-mini-rung'));
-  const miniRungParts = miniRungs.map(function(g) {
-    return { line: g.querySelector('line'), circles: g.querySelectorAll('circle') };
+  var pathML = null, pathMR = null, miniRungParts = [];
+  document.addEventListener('DOMContentLoaded', function() {
+    pathML = document.getElementById('dna-mini-sl');
+    pathMR = document.getElementById('dna-mini-sr');
+    miniRungParts = Array.from(document.querySelectorAll('.dna-mini-rung')).map(function(g) {
+      return { line: g.querySelector('line'), circles: g.querySelectorAll('circle') };
+    });
   });
 
-  function scaleAtPhase(phase) {
-    return Math.cos(2 * Math.PI * phase);
-  }
+  function scaleAtPhase(phase) { return Math.cos(2 * Math.PI * phase); }
 
   function catmullRom(pts) {
     const n = pts.length;
@@ -77,37 +77,31 @@
     const lpts = [], rpts = [];
     for (let i = 0; i < 9; i++) {
       const phase = ((t + i * STEP) % DUR) / DUR;
-      const s  = scaleAtPhase(phase);
-      const lx = 50 - 32 * s;
-      const rx = 50 + 32 * s;
+      const s = scaleAtPhase(phase);
+      const lx = 50 - 32 * s, rx = 50 + 32 * s;
       const p = rungParts[i];
-      p.line.setAttribute('x1', lx.toFixed(2));
-      p.line.setAttribute('x2', rx.toFixed(2));
-      p.circles[0].setAttribute('cx', lx.toFixed(2));
-      p.circles[1].setAttribute('cx', rx.toFixed(2));
-      lpts.push({x: lx, y: yPos[i]});
-      rpts.push({x: rx, y: yPos[i]});
+      p.line.setAttribute('x1', lx.toFixed(2)); p.line.setAttribute('x2', rx.toFixed(2));
+      p.circles[0].setAttribute('cx', lx.toFixed(2)); p.circles[1].setAttribute('cx', rx.toFixed(2));
+      lpts.push({x: lx, y: yPos[i]}); rpts.push({x: rx, y: yPos[i]});
     }
     pathL.setAttribute('d', catmullRom(lpts));
     pathR.setAttribute('d', catmullRom(rpts));
 
-    // Mini DNA (same timing, scaled to 40px viewBox)
-    const mlpts = [], mrpts = [];
-    for (let i = 0; i < 5; i++) {
-      const phase = ((t + i * STEP) % DUR) / DUR;
-      const s  = scaleAtPhase(phase);
-      const lx = 20 - 13 * s;
-      const rx = 20 + 13 * s;
-      const p = miniRungParts[i];
-      p.line.setAttribute('x1', lx.toFixed(2));
-      p.line.setAttribute('x2', rx.toFixed(2));
-      p.circles[0].setAttribute('cx', lx.toFixed(2));
-      p.circles[1].setAttribute('cx', rx.toFixed(2));
-      mlpts.push({x: lx, y: yPosMini[i]});
-      mrpts.push({x: rx, y: yPosMini[i]});
+    // Mini DNA
+    if (pathML && miniRungParts.length) {
+      const mlpts = [], mrpts = [];
+      for (let i = 0; i < 5; i++) {
+        const phase = ((t + i * STEP) % DUR) / DUR;
+        const s = scaleAtPhase(phase);
+        const lx = 20 - 13 * s, rx = 20 + 13 * s;
+        const p = miniRungParts[i];
+        p.line.setAttribute('x1', lx.toFixed(2)); p.line.setAttribute('x2', rx.toFixed(2));
+        p.circles[0].setAttribute('cx', lx.toFixed(2)); p.circles[1].setAttribute('cx', rx.toFixed(2));
+        mlpts.push({x: lx, y: yPosMini[i]}); mrpts.push({x: rx, y: yPosMini[i]});
+      }
+      pathML.setAttribute('d', catmullRom(mlpts));
+      pathMR.setAttribute('d', catmullRom(mrpts));
     }
-    pathML.setAttribute('d', catmullRom(mlpts));
-    pathMR.setAttribute('d', catmullRom(mrpts));
 
     requestAnimationFrame(frame);
   }
@@ -165,7 +159,7 @@
   <!-- ── Profile ── -->
   <div class="profile">
     <div class="profile-photo-wrap">
-      <svg class="deco-dna-mini" xmlns="http://www.w3.org/2000/svg" width="44" height="170" viewBox="0 0 40 155">
+      <svg class="deco-dna-mini" xmlns="http://www.w3.org/2000/svg" width="28" height="110" viewBox="0 0 40 155">
         <path id="dna-mini-sl" stroke="#00ccee" stroke-width="1.5" fill="none"/>
         <path id="dna-mini-sr" stroke="#aaefff" stroke-width="1.5" fill="none"/>
         <g class="dna-mini-rung"><line x1="7" y1="0"   x2="33" y2="0"   stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="0"   r="4" fill="#00ccee"/><circle cx="33" cy="0"   r="4" fill="#aaefff"/></g>
@@ -175,22 +169,22 @@
         <g class="dna-mini-rung"><line x1="7" y1="140" x2="33" y2="140" stroke="#44ddff" stroke-width="1.5"/><circle cx="7"  cy="140" r="4" fill="#00ccee"/><circle cx="33" cy="140" r="4" fill="#aaefff"/></g>
       </svg>
       <img class="profile-photo" src="profile.jpg" alt="Daniel Hinjos García">
-      <svg class="deco-nn-mini" xmlns="http://www.w3.org/2000/svg" width="56" height="170" viewBox="0 0 50 155">
+      <svg class="deco-nn-mini" xmlns="http://www.w3.org/2000/svg" width="34" height="110" viewBox="0 0 50 155">
         <g class="nn-conn-ih" fill="none" stroke="#00ccee" stroke-width="0.9">
-          <path pathLength="1" d="M10,25 C20,25 20,18  30,18 "/><path pathLength="1" d="M10,25 C20,25 20,72  30,72 "/><path pathLength="1" d="M10,25 C20,25 20,126 30,126"/>
-          <path pathLength="1" d="M10,77 C20,77 20,18  30,18 "/><path pathLength="1" d="M10,77 C20,77 20,72  30,72 "/><path pathLength="1" d="M10,77 C20,77 20,126 30,126"/>
-          <path pathLength="1" d="M10,129 C20,129 20,18  30,18 "/><path pathLength="1" d="M10,129 C20,129 20,72  30,72 "/><path pathLength="1" d="M10,129 C20,129 20,126 30,126"/>
+          <path pathLength="1" d="M10,25 C20,25 20,18  30,18 "/><path pathLength="1" d="M10,25 C20,25 20,77  30,77 "/><path pathLength="1" d="M10,25 C20,25 20,136 30,136"/>
+          <path pathLength="1" d="M10,77 C20,77 20,18  30,18 "/><path pathLength="1" d="M10,77 C20,77 20,77  30,77 "/><path pathLength="1" d="M10,77 C20,77 20,136 30,136"/>
+          <path pathLength="1" d="M10,129 C20,129 20,18  30,18 "/><path pathLength="1" d="M10,129 C20,129 20,77  30,77 "/><path pathLength="1" d="M10,129 C20,129 20,136 30,136"/>
         </g>
         <g class="nn-conn-ho" fill="none" stroke="#00ccee" stroke-width="0.9">
-          <path pathLength="1" d="M32,18  C40,18  40,52  40,52  L40,52"/><path pathLength="1" d="M32,18  C40,18  40,103 40,103 L40,103"/>
-          <path pathLength="1" d="M32,72  C40,72  40,52  40,52  L40,52"/><path pathLength="1" d="M32,72  C40,72  40,103 40,103 L40,103"/>
-          <path pathLength="1" d="M32,126 C40,126 40,52  40,52  L40,52"/><path pathLength="1" d="M32,126 C40,126 40,103 40,103 L40,103"/>
+          <path pathLength="1" d="M32,18  C41,18  41,52  42,52 "/><path pathLength="1" d="M32,18  C41,18  41,103 42,103"/>
+          <path pathLength="1" d="M32,77  C41,77  41,52  42,52 "/><path pathLength="1" d="M32,77  C41,77  41,103 42,103"/>
+          <path pathLength="1" d="M32,136 C41,136 41,52  42,52 "/><path pathLength="1" d="M32,136 C41,136 41,103 42,103"/>
         </g>
         <g class="nn-layer-i" fill="#00ccee" fill-opacity="0" stroke="#00ccee" stroke-width="1.2">
           <circle cx="10" cy="25"  r="5"/><circle cx="10" cy="77"  r="5"/><circle cx="10" cy="129" r="5"/>
         </g>
         <g class="nn-layer-h" fill="#00ccee" fill-opacity="0" stroke="#00ccee" stroke-width="1.2">
-          <circle cx="30" cy="18" r="5"/><circle cx="30" cy="72" r="5"/><circle cx="30" cy="126" r="5"/>
+          <circle cx="30" cy="18" r="5"/><circle cx="30" cy="77" r="5"/><circle cx="30" cy="136" r="5"/>
         </g>
         <g class="nn-layer-o" fill="#00ccee" fill-opacity="0" stroke="#00ccee" stroke-width="1.2">
           <circle cx="42" cy="52" r="5"/><circle cx="42" cy="103" r="5"/>
